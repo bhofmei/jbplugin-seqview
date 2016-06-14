@@ -24,12 +24,16 @@ return declare( Component,
 define('SeqViewsPlugin/main', [ 
     'dojo/_base/declare',
     'dojo/_base/lang',
+    'dojo/_base/event',
+    'dojo/on',
     'JBrowse/has',
     'JBrowse/Plugin'
 ],
     function(
         declare,
         lang,
+        domEvent,
+        on,
         has,
         JBrowsePlugin
     ) { 
@@ -38,7 +42,6 @@ return declare( JBrowsePlugin,
     constructor: function( args ) {
         var thisB = this;
         var browser = this.browser;
-        console.log("plugin: SeqViews");
         
         browser.afterMilestone( 'loadConfig', function() {
             if (typeof browser.config.classInterceptList === 'undefined') {
@@ -50,7 +53,8 @@ return declare( JBrowsePlugin,
                 lang.extend( CanvasFeatures, {
                     //config['displayStyle']: (browser.cookie("track-style-"+this.name) || 'default'),
                     fillBlock: thisB.fillBlock,
-                    _trackMenuOptions: thisB._trackMenuOptions
+                    _trackMenuOptions: thisB._trackMenuOptions,
+                    _attachMouseOverEvents: thisB._attachMouseOverEvents
                     
                 });
             });
@@ -129,6 +133,40 @@ return declare( JBrowsePlugin,
                             args.finishCallback(e);
                         })
         );
+    },
+    
+    _attachMouseOverEvents: function( ) {
+        var gv = this.browser.view;
+        var thisB = this;
+
+        if( this.displayMode == 'collapsed' ) {
+            if( this._mouseoverEvent ) {
+                this._mouseoverEvent.remove();
+                delete this._mouseoverEvent;
+            }
+
+            if( this._mouseoutEvent ) {
+                this._mouseoutEvent.remove();
+                delete this._mouseoutEvent;
+            }
+        } else {
+            if( !this._mouseoverEvent ) {
+                this._mouseoverEvent = this.own( on( this.staticCanvas, 'mousemove', function( evt ) {
+                    if(thisB.config.displayStyle == 'histograms')
+                        return;
+                    evt = domEvent.fix( evt );
+                    var bpX = gv.absXtoBp( evt.clientX );
+                    var feature = thisB.layout.getByCoord( bpX, ( evt.offsetY === undefined ? evt.layerY : evt.offsetY ) );
+                    thisB.mouseoverFeature( feature, evt );
+                }))[0];
+            }
+
+            if( !this._mouseoutEvent ) {
+                this._mouseoutEvent = this.own( on( this.staticCanvas, 'mouseout', function( evt) {
+                    thisB.mouseoverFeature( undefined );
+                }))[0];
+            }
+        }
     },
     
     _trackMenuOptions: function () {
@@ -217,7 +255,7 @@ return declare( JBrowsePlugin,
                 { type: 'dijit/MenuSeparator' },
                 {
                     label: "Display mode",
-                    iconClass: "dijitIconPackage",
+                    iconClass: "dijitIconApplication",
                     title: "Toggle histograms/features or make features smaller",
                     children: this.displayModeMenuItems
                 },

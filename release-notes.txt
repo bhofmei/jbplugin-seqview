@@ -1,0 +1,2 @@
+#v1.0.0 Jun 13, 2016
+ability to toggle between features (reads) and histograms implemented but still needs work

@@ -117,6 +117,7 @@ return declare( JBrowsePlugin,
                 }
                 else {
                     this.setLabel( this.key );
+                    this.removeYScale();
                     this.fillTooManyFeaturesMessage(
                         blockIndex,
                         block,
@@ -152,7 +153,7 @@ return declare( JBrowsePlugin,
         } else {
             if( !this._mouseoverEvent ) {
                 this._mouseoverEvent = this.own( on( this.staticCanvas, 'mousemove', function( evt ) {
-                    if(thisB.config.displayStyle == 'histograms')
+                    if(thisB.config.displayStyle == 'histograms' || thisB.layout === undefined)
                         return;
                     evt = domEvent.fix( evt );
                     var bpX = gv.absXtoBp( evt.clientX );

@@ -1,2 +1,6 @@
+#v1.0.1 Sep 12, 2016
+- fixed bug where y-scale was not removed when "too much data to show" error arose
+- fixed hidden bug (only noticable with error messages in the console) for undefined layout
+
 #v1.0.0 Jun 13, 2016
 ability to toggle between features (reads) and histograms implemented but still needs work

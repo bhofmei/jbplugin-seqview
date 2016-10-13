@@ -8,16 +8,20 @@ This plugin allowst the user to manually switch between feature/read views and h
 For JBrowse 1.11.6+ in the _JBrowse/plugins_ folder, type:  
 ``git clone https://github.com/bhofmei/jbplugin-seqview.git SeqViewsPlugin``
 
-##Activate
-Add this to jbrowse.conf:
-    ``"plugins": [
-        'SeqViewsPlugin'
-    ],``
+downloaded the latest release version at [releases](https://github.com/bhofmei/jbplugin-seqview/releases).  
+Unzip the downloaded folder, place in _JBrowse/plugins_, and rename the folder _SeqViewsPlugin_
 
-If that doesn't work, add this to jbrowse_conf.json:
-    ``"plugins" : {
+##Activate
+Add this to _jbrowse.conf_ under `[GENERAL]`:
+
+    [ plugins.SeqViewsPlugin ]
+    location = plugins/SeqViewsPlugin
+
+If that doesn't work, add this to *jbrowse_conf.json*:
+
+    "plugins" : {
         "SeqViewsPlugin" : { "location" : "plugins/SeqViewsPlugin" }
-    }``
+    }
     
 ##Use
 For all track types that are derived from ``CanvasFeatures`` tracks, i.e. Alignments2, CanvasFeatures, smAlginments, have additional options in the *Display Mode* menu for each track.

@@ -1,0 +1,79 @@
+{
+   "formatVersion" : 1,
+   "names" : {
+      "type" : "Hash",
+      "url" : "names/"
+   },
+   "tracks" : [
+      {
+         "key" : "Reference sequence",
+         "seqType" : "dna",
+         "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
+         "category" : "Test data",
+         "chunkSize" : 20000,
+         "storeClass" : "JBrowse/Store/Sequence/StaticChunked",
+         "type" : "SequenceTrack",
+         "label" : "DNA"
+      },
+      {
+         "key" : "Genes",
+         "compress" : 0,
+         "category" : "Test data",
+         "urlTemplate" : "tracks/genes/{refseq}/trackData.json",
+         "type" : "JBrowse/View/Track/CanvasFeatures",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "style" : {
+            "className" : "feature",
+            "color" : "#daa520"
+         },
+         "label" : "genes"
+      },
+      {
+         "key" : "Genes",
+         "compress" : 0,
+         "category" : "Test data",
+         "urlTemplate" : "tracks/genes1/{refseq}/trackData.json",
+         "type" : "JBrowse/View/Track/CanvasFeatures",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "style" : {
+            "className" : "feature",
+            "color" : "#daa520"
+         },
+         "label" : "genes1",
+         "displayStyle": "histograms"
+      },
+      {
+         "label" : "tes",
+         "key" : "Transposable Elements",
+         "compress" : 0,
+         "category" : "Test data",
+         "urlTemplate" : "tracks/tes/{refseq}/trackData.json",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "style" : {
+            "className" : "feature",
+            "color" : "#77158D"
+         },
+         "histograms" : {
+            "color": "#77158D"
+         },
+         "type" : "JBrowse/View/Track/CanvasFeatures"
+      },
+      {
+         "label" : "tes1",
+         "key" : "Transposable Elements",
+         "compress" : 0,
+         "category" : "Test data",
+         "urlTemplate" : "tracks/tes/{refseq}/trackData.json",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "style" : {
+            "className" : "feature",
+            "color" : "#77158D"
+         },
+         "histograms" : {
+            "color": "#77158D"
+         },
+         "type" : "JBrowse/View/Track/CanvasFeatures",
+         "displayStyle": "histograms"
+      }
+   ]
+}

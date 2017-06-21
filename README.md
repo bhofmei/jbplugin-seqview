@@ -23,7 +23,12 @@ If that doesn't work, add this to *jbrowse_conf.json*:
         "SeqViewsPlugin" : { "location" : "plugins/SeqViewsPlugin" }
     }
     
-##Use
+## Test
+Sample data is included in the plugin to test that the plugin is working properly. With `URL` as the URL path to the JBrowse instance, navigate a web browser to `URL/index.html?data=plugins/SeqViewsPlugin/sample_data`.
+
+![Demo Image](img/demo_image.png)
+
+## Use
 For all track types that are derived from ``CanvasFeatures`` tracks, i.e. Alignments2, CanvasFeatures, smAlginments, have additional options in the *Display Mode* menu for each track.
 
 * **Default**: switch between features/histograms based on zoom as it normally would
@@ -32,4 +37,6 @@ For all track types that are derived from ``CanvasFeatures`` tracks, i.e. Alignm
     * Alignment-like tracks: if no underlying bigwig file with coverage information, gives user a warning
     * Features-like tracks: always computes histograms
     
-![Display mode menu item](example-img.png)
+![Display mode menu item](img/menu_image.png)
+
+This is especially useful for high density RNA-seq tracks when the switch between features and histograms occurs at an incovienent zoom level.

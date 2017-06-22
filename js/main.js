@@ -1,27 +1,4 @@
-require({cache:{
-'JBrowse/Plugin':function(){
-define("JBrowse/Plugin", [
-           'dojo/_base/declare',
-           'JBrowse/Component'
-       ],
-       function( declare, Component ) {
-return declare( Component,
-{
-    constructor: function( args ) {
-        this.name = args.name;
-        this.cssLoaded = args.cssLoaded;
-        this._finalizeConfig( args.config );
-    },
-
-    _defaultConfig: function() {
-        return {
-            baseUrl: '/plugins/'+this.name
-        };
-    }
-});
-});
-}}});
-define('SeqViewsPlugin/main', [ 
+define('SeqViewsPlugin/main', [
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/_base/event',
@@ -92,10 +69,10 @@ return declare( JBrowsePlugin,
                                                  || (stats.featureDensity||0) / this.config.maxFeatureScreenDensity ),
                         showFeaturesBackup: scale >= ( this.config.style.featureScale
                                                  || (stats.featureDensity||0) / (this.config.maxFeatureScreenDensity*10) ),
-                        showLabels: this.showLabels && this.displayMode == "normal"
+                        showLabels: this.showLabels && this.displayMode === "normal"
                             && scale >= ( this.config.style.labelScale
                                           || (stats.featureDensity||0) * this.config.style._defaultLabelScale ),
-                        showDescriptions: this.showLabels && this.displayMode == "normal"
+                        showDescriptions: this.showLabels && this.displayMode === "normal"
                             && scale >= ( this.config.style.descriptionScale
                                           || (stats.featureDensity||0) * this.config.style._defaultDescriptionScale)
                     },
@@ -129,7 +106,7 @@ return declare( JBrowsePlugin,
 
         this.store.getGlobalStats(
             fill,
-            dojo.hitch( this, function(e) {
+            lang.hitch( this, function(e) {
                             this._handleError( e, args );
                             args.finishCallback(e);
                         })
@@ -140,7 +117,7 @@ return declare( JBrowsePlugin,
         var gv = this.browser.view;
         var thisB = this;
 
-        if( this.displayMode == 'collapsed' ) {
+        if( this.displayMode === 'collapsed' ) {
             if( this._mouseoverEvent ) {
                 this._mouseoverEvent.remove();
                 delete this._mouseoverEvent;
@@ -153,7 +130,7 @@ return declare( JBrowsePlugin,
         } else {
             if( !this._mouseoverEvent ) {
                 this._mouseoverEvent = this.own( on( this.staticCanvas, 'mousemove', function( evt ) {
-                    if(thisB.config.displayStyle == 'histograms' || thisB.layout === undefined)
+                    if(thisB.config.displayStyle === 'histograms' || thisB.layout === undefined)
                         return;
                     evt = domEvent.fix( evt );
                     var bpX = gv.absXtoBp( evt.clientX );
@@ -181,7 +158,7 @@ return declare( JBrowsePlugin,
                 label: displayMode,
                 type: 'dijit/CheckedMenuItem',
                 title: "Render this track in " + displayMode + " mode",
-                checked: thisB.displayMode == displayMode,
+                checked: thisB.displayMode === displayMode,
                 onClick: function() {
                     thisB.displayMode = displayMode;
                     thisB._clearLayout();
@@ -195,35 +172,31 @@ return declare( JBrowsePlugin,
             };
         });
 
-        var updateMenuItems = dojo.hitch(this, function() {
-            for(var index in this.displayModeMenuItems) {
-                this.displayModeMenuItems[index].checked = (this.displayMode == this.displayModeMenuItems[index].label);
+        /*var updateMenuItems = lang.hitch(this, function() {
+            var index;
+            for(index in this.displayModeMenuItems) {
+                this.displayModeMenuItems[index].checked = (this.displayMode === this.displayModeMenuItems[index].label);
             }
-        });
+        });*/
         
         var displayStyleList=['default','features','histograms'];
-        var displayStyleTitle={default: 'Display features/histograms based on zoom',
-                              features:'Force track to display with features',
-                              histograms:'Force track to display with histograms'};
+        var displayStyleTitle = {'default': 'Display features/histograms based on zoom',
+                              'features': 'Force track to display with features',
+                              'histograms': 'Force track to display with histograms'};
         var displayStyleMenuItems = displayStyleList.map(function(displayStyle){
             return{
                 label:displayStyle,
                 type: 'dijit/CheckedMenuItem',
                 title: (displayStyleTitle[displayStyle]|| 'Display track in '+displayStyle),
-                checked: thisB.config.displayStyle == displayStyle,
+                checked: thisB.config.displayStyle === displayStyle,
                 onClick: function(){
                     thisB.config.displayStyle = displayStyle;
                     thisB._clearLayout();
                     thisB.hideAll();
                     thisB.genomeView.showVisibleBlocks(true);
                     thisB.makeTrackMenu();
-                }  
+                }
             };
-        });
-        var updateStyleMenuItems = dojo.hitch(this, function() {
-            for(var index in displayStyleMenuItems) {
-                displayStyleMenuItems[index].checked = (this.config.displayStyle == displayStyleMenuItems[index].label);
-            }
         });
         
         this.displayModeMenuItems.push.apply(this.displayModeMenuItems, [
@@ -234,7 +207,7 @@ return declare( JBrowsePlugin,
                 label:displayStyle,
                 type: 'dijit/CheckedMenuItem',
                 title: (displayStyleTitle[displayStyle]|| 'Display track in '+displayStyle),
-                checked: thisB.config.displayStyle == displayStyle,
+                checked: thisB.config.displayStyle === displayStyle,
                 onClick: function(){
                     thisB.config.displayStyle = displayStyle;
                     thisB._clearLayout();
@@ -244,11 +217,12 @@ return declare( JBrowsePlugin,
                 }  
             };
         }));
-        var updateStyleMenuItems = dojo.hitch(this, function() {
-            for(var index in this.displayStyleMenuItems) {
-                this.displayModeMenuItems[index].checked = (this.config.displayStyle == this.displayModeMenuItems[index].label);
+        /*var updateStyleMenuItems = lang.hitch(this, function() {
+            var index;
+            for(index in this.displayStyleMenuItems) {
+                this.displayModeMenuItems[index].checked = (this.config.displayStyle === this.displayModeMenuItems[index].label);
             }
-        });
+        });*/
 
         opts.push.apply(
             opts,

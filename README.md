@@ -1,7 +1,7 @@
 #Sequence Views Plugin
 This is a JBrowse plugin
  
-This plugin allowst the user to manually switch between feature/read views and histogram views. Normally, the switch between view styles depends on the zoom level, which can be frustrating.
+This plugin allows the user to manually switch between feature/read views and histogram views. Normally, the switch between view styles depends on the zoom level, which can be frustrating.
 
 ##Install
 

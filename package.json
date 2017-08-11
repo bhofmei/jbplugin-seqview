@@ -1,0 +1,22 @@
+{
+  "name": "SeqViewsPlugin",
+  "version": "1.0.2",
+  "description": "allows the user to manually switch between feature/read views and histogram views",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhofmei/jbplugin-seqview.git"
+  },
+  "keywords": [
+    "JBrowse"
+  ],
+  "author": "Brigitte Hofmeister",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhofmei/jbplugin-seqview/issues"
+  },
+  "homepage": "https://github.com/bhofmei/jbplugin-seqview#readme"
+}

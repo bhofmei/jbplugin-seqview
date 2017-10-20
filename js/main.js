@@ -20,7 +20,7 @@ define('SeqViewsPlugin/main', [
       constructor: function (args) {
         var thisB = this;
         var browser = this.browser;
-        this.config.version = '1.0.3'
+        this.config.version = '1.1.0'
         console.log('SeqViewsPlugin starting - v' + this.config.version);
 
         browser.afterMilestone('loadConfig', function () {

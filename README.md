@@ -29,7 +29,7 @@ Sample data is included in the plugin to test that the plugin is working properl
 ![Demo Image](img/demo_image.png)
 
 ## Use
-For all track types that are derived from ``CanvasFeatures`` tracks, i.e. Alignments2, CanvasFeatures, smAlginments, have additional options in the *Display Mode* menu for each track.
+For all track types that are derived from ``CanvasFeatures`` tracks, i.e. Alignments2, CanvasFeatures, smAlginments, or ``HTMLFeatures`` have additional options in the *Display Mode* menu for each track.
 
 * **Default**: switch between features/histograms based on zoom as it normally would
 * **Features**: force track to show features/alignments; once zoomed out too far, it gives a warning to zoom in

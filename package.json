@@ -1,6 +1,6 @@
 {
   "name": "jbplugin-seqview",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "allows the user to manually switch between feature/read views and histogram views",
   "main": "main.js",
   "scripts": {
